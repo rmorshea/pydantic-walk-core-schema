@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ['3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@v4
       - name: UV cache
@@ -23,10 +23,10 @@ jobs:
       - name: Install UV
         uses: astral-sh/setup-uv@v5
         with:
-          version: "latest"
+          version: latest
           python-version: ${{ matrix.python-version }}
           enable-cache: true
-          cache-dependency-glob: "**/pyproject.toml"
+          cache-dependency-glob: '**/pyproject.toml'
       - name: Run tests
         run: uv run dev.py cov
       - name: Upload coverage
@@ -45,7 +45,7 @@ jobs:
     if: github.ref != format('refs/heads/{0}', github.event.repository.default_branch)
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 50 }
+        with: {fetch-depth: 50}
       - name: Download new coverage
         uses: actions/download-artifact@v4
         with:
