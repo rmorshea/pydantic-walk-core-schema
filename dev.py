@@ -2,7 +2,6 @@
 
 import os
 import subprocess
-from collections.abc import Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING
 from typing import Literal
@@ -90,51 +89,17 @@ def lint(
                     "--ignore-missing-references",
                     "--check",
                     "README.md",
-                    "docs",
                 ]
             )
-            doc_cmd(["ruff", "format", "--check"], no_pad=True)
-            doc_cmd(["ruff", "check"], no_pad=True)
         else:
-            run(["mdformat", "--ignore-missing-references", "README.md", "docs"])
-            doc_cmd(["ruff", "format"], no_pad=True)
-            doc_cmd(["ruff", "check", "--fix"], no_pad=True)
+            run(["mdformat", "--ignore-missing-references", "README.md"])
     if not no_yml_style:
         if check:
-            run(["yamlfix", "--check", "docs", ".github"])
+            run(["yamlfix", "--check", ".github"])
         else:
-            run(["yamlfix", "docs", ".github"])
+            run(["yamlfix", ".github"])
     if not no_py_types:
         run(["pyright"])
-
-
-@main.group("docs")
-def docs():
-    """Documentation commands."""
-
-
-@docs.command("build")
-def docs_build():
-    """Build documentation."""
-    run(["mkdocs", "build", "-f", "docs/mkdocs.yml"])
-
-
-@docs.command("publish")
-def docs_publish():
-    """Publish documentation."""
-    run(["mkdocs", "gh-deploy", "-f", "docs/mkdocs.yml"])
-
-
-@docs.command("serve")
-def docs_serve():
-    """Serve documentation."""
-    run(["mkdocs", "serve", "-f", "docs/mkdocs.yml"])
-
-
-@docs.command("fix")
-def fix():
-    """Fix style issues."""
-    run(["pytest", "tests/test_docs.py", "--update-examples"])
 
 
 if TYPE_CHECKING:
@@ -196,25 +161,6 @@ def report(
                 if end_col:
                     file_parts.append(f"endCol={end_col}")
         click.echo(f"::{kind} {','.join(file_parts)}")
-
-
-def doc_cmd(cmd: Sequence[str], *, no_pad: bool = False):
-    run(
-        list(
-            filter(
-                None,
-                [
-                    "doccmd",
-                    "-v",
-                    "--language=python",
-                    "--no-pad-file" if no_pad else "",
-                    "--command",
-                    " ".join(cmd),
-                    "docs",
-                ],
-            )
-        )
-    )
 
 
 if __name__ == "__main__":
