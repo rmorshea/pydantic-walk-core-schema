@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v2025.02.0
+_src_path: https://github.com/rmorshea/python-copier-template
+author_email: ryan.morshead@gmail.com
+author_name: Ryan Morshead
+project_description: A PyPI package containing a previously private, and now removed,
+    function for recursively walking a Pydantic schema.
+project_title: Pydantic Walk Core Schema
+python_package_name: pydantic_walk_core_schema
+python_version_range: '>=3.11'
+repo_url: https://github.com/rmorshea/pydantic-walk-core-schema
