@@ -1214,6 +1214,9 @@ wheels = [
 name = "pydantic-walk-core-schema"
 version = "0.0.1"
 source = { editable = "." }
+dependencies = [
+    { name = "pydantic-core" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -1288,6 +1291,7 @@ util = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "pydantic-core", specifier = ">=2.27.2" }]
 
 [package.metadata.requires-dev]
 dev = [
