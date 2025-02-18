@@ -9,7 +9,7 @@ packages = ["src/pydantic_walk_core_schema"]
 
 [project]
 name = "pydantic_walk_core_schema"
-version = "0.0.1"
+version = "1.0.0"
 description = "Dependency injection without the boilerplate."
 readme = "README.md"
 requires-python = ">=3.11,<4"
